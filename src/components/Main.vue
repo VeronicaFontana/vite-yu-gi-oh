@@ -25,12 +25,12 @@ export default {
 
       <div class="card-box">
         <div class="found">
-          <span>Founds 39 cards</span>
+          <span>Founds xxx cards</span>
         </div>
         <div class="box-interno">
           <div class="row d-flex justify-content-between">
             <Card v-for="singleCard in store.cardList" :key="singleCard.id" :name="singleCard.name" :archetype="singleCard.archetype" 
-            :image="singleCard.card_images.image_url" />
+            :image="singleCard.card_images[0].image_url" />
           </div>
         </div>
       </div>

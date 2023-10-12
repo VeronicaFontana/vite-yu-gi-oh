@@ -28,7 +28,6 @@ export default {
 .card{
   background-color: $background;
   margin-bottom: 20px;
-  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,7 +41,6 @@ export default {
   
   .text{
     margin: 10px 0;
-    padding: auto 0;
     height: 110px;
     display: flex;
     flex-direction: column;
