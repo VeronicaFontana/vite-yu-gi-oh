@@ -29,7 +29,8 @@ export default {
         </div>
         <div class="box-interno">
           <div class="row d-flex justify-content-between">
-            <Card v-for="singleCard in store.cardList" :key="singleCard.id" :name="singleCard.name" :archetype="singleCard.archetype" :image="singleCard.card_images.image_url" />
+            <Card v-for="singleCard in store.cardList" :key="singleCard.id" :name="singleCard.name" :archetype="singleCard.archetype" 
+            :image="singleCard.card_images.image_url" />
           </div>
         </div>
       </div>
