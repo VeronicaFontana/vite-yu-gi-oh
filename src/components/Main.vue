@@ -44,9 +44,9 @@ export default {
 @use "../scss/partials/variables" as *;
 
 main{
-  height: calc(100vh - 60px);
   background-color: $background;
   text-align: center;
+  padding-bottom: 20px;
   
   .card-box{
     background-color: white;
