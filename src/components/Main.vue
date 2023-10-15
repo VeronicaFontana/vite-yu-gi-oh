@@ -1,13 +1,15 @@
 <script>
 import Card from "./partials/Card.vue";
-import Menu from "./partials/Menu.vue";
 import {store} from "../data/store";
-import axios from 'axios';
+import Results from "./partials/Results.vue";
+import Menu from "./partials/Menu.vue";
+import axios from "axios";
 
 export default {
   name: "Main",
   components:{
     Card,
+    Results,
     Menu
   },
   data(){
@@ -16,7 +18,7 @@ export default {
     }
   },
   methods:{
-    getApi(){
+    getApiArch(){
       axios.get(store.apiUrl, {
         params:{
           num: 20,
@@ -25,8 +27,9 @@ export default {
         }
       })
       .then( risultato =>{
-        console.log(risultato.data.data)
+        console.log(this.archetype)
         store.cardList = risultato.data.data;
+        console.log(risultato.data.data)
         store.cardList.forEach(card=>{
           if(!store.archetypeList.includes(card.archetype)){
             store.archetypeList.push(card.archetype)
@@ -34,7 +37,8 @@ export default {
         })
       })
       .catch( error =>{
-        console.log(error.data)
+        console.log(this.archetype)
+        console.log("errore")
       })
     }
   }
@@ -44,12 +48,10 @@ export default {
 <template>
   <main>
     <div class="container">
-
-      <Menu @startSearch="getApi" />
-
       <div class="card-box">
+        <Menu @startSearch="getApiArch" />
         <div class="found">
-          <span>Founds xxx cards</span>
+          <Results />
         </div>
         <div class="box-interno">
           <div class="row d-flex justify-content-between">

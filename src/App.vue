@@ -3,7 +3,7 @@ import Header from './components/Header.vue';
 import Main from './components/Main.vue';
 import { store } from './data/store';
 import axios from 'axios';
-import Menu from './components/partials/Menu.vue';
+import Results from './components/partials/Results.vue';
 
 
 export default {
@@ -11,7 +11,7 @@ export default {
   components:{
     Header,
     Main,
-    Menu
+    Results
   },
   data(){
     return{
@@ -36,7 +36,7 @@ export default {
         })
       })
       .catch( error =>{
-        console.log(error.data)
+        store.cardList= [];
       })
     }
   },
