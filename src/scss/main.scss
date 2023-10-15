@@ -1,8 +1,6 @@
 @use "./partials/variables" as *;
 @import "bootstrap/scss/bootstrap";
-@import '@fontsource/montserrat/index.css';
-@import '@fontsource/montserrat/700.css';
 
 body{
-  font-family: $main-font;
+  font-family: Arial, Helvetica, sans-serif
 }

@@ -2,6 +2,7 @@
 import Card from "./partials/Card.vue";
 import Menu from "./partials/Menu.vue";
 import {store} from "../data/store";
+import axios from 'axios';
 
 export default {
   name: "Main",
@@ -13,6 +14,29 @@ export default {
     return{
       store
     }
+  },
+  methods:{
+    getApi(){
+      axios.get(store.apiUrl, {
+        params:{
+          num: 20,
+          offset: 1,
+          archetype: store.archetypeToSearch
+        }
+      })
+      .then( risultato =>{
+        console.log(risultato.data.data)
+        store.cardList = risultato.data.data;
+        store.cardList.forEach(card=>{
+          if(!store.archetypeList.includes(card.archetype)){
+            store.archetypeList.push(card.archetype)
+          }
+        })
+      })
+      .catch( error =>{
+        console.log(error.data)
+      })
+    }
   }
 }
 </script>
@@ -21,7 +45,7 @@ export default {
   <main>
     <div class="container">
 
-      <Menu />
+      <Menu @startSearch="getApi" />
 
       <div class="card-box">
         <div class="found">
@@ -30,7 +54,7 @@ export default {
         <div class="box-interno">
           <div class="row d-flex justify-content-between">
             <Card v-for="singleCard in store.cardList" :key="singleCard.id" :name="singleCard.name" :archetype="singleCard.archetype" 
-            :image="singleCard.card_images[0].image_url" />
+            :image="singleCard.card_images[0].image_url" /> <!-- indice 0 perchè gli devo passare la prima proprietà di un array di oggetti -->
           </div>
         </div>
       </div>
