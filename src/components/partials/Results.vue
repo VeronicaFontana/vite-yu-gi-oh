@@ -10,8 +10,10 @@ export default {
   },
   computed:{
     outputResult(){
-      if(store.cardList.length > 0){
+      if(store.cardList.length > 0 && store.isPresent){
         return "Risultati trovati: " + store.cardList.length;
+      }else{
+        return "Risultati trovati: nessuno";
       }
     }
   }

@@ -4,7 +4,8 @@ export default {
   props:{
     name: String,
     archetype: String,
-    image: Object
+    image: String,
+    race: String
   }
 }
 </script>
@@ -17,7 +18,8 @@ export default {
       </div>
       <div class="text">
         <h4>{{ name }}</h4>
-        <span>{{ archetype }}</span>
+        <p v-if="archetype != null">Archetype: <span>{{ archetype }}</span></p>
+        <p v-if="race != null">Race: <span>{{ race }}</span></p>
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@ export default {
   
   .text{
     margin: 10px 0;
-    height: 110px;
+    height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -51,6 +53,9 @@ export default {
     }
     span{
       color: $text;
+    }
+    span:last-child{
+      color: brown;
     }
   }
 }

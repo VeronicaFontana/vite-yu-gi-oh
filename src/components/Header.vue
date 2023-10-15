@@ -7,7 +7,9 @@ export default {
 <template>
   <header>
     <div class="text d-flex">
-      <div>LOGO</div>
+      <div class="image-logo">
+        <img src="../../public/yu-gi-oh-logo.png" alt="">
+      </div>
       <h1>Yu-Gi-Oh Api</h1>
     </div>
   </header>
@@ -27,6 +29,17 @@ header{
 
     div{
       margin-right: 20px;
+    }
+
+    .image-logo{
+      width: 150px;
+      height: 50px;
+      
+
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

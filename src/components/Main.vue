@@ -19,11 +19,13 @@ export default {
   },
   methods:{
     getApiArch(){
+      store.isPresent=true;
       axios.get(store.apiUrl, {
         params:{
           num: 20,
           offset: 1,
-          archetype: store.archetypeToSearch
+          archetype: store.archetypeToSearch,
+          race: store.raceToSearch
         }
       })
       .then( risultato =>{
@@ -34,11 +36,14 @@ export default {
           if(!store.archetypeList.includes(card.archetype)){
             store.archetypeList.push(card.archetype)
           }
+          if(!store.raceList.includes(card.race)){
+            store.raceList.push(card.race)
+          }
         })
       })
       .catch( error =>{
-        console.log(this.archetype)
         console.log("errore")
+        store.isPresent=false;
       })
     }
   }
@@ -54,10 +59,11 @@ export default {
           <Results />
         </div>
         <div class="box-interno">
-          <div class="row d-flex justify-content-between">
+          <div v-if="store.isPresent" class="row d-flex justify-content-between">
             <Card v-for="singleCard in store.cardList" :key="singleCard.id" :name="singleCard.name" :archetype="singleCard.archetype" 
-            :image="singleCard.card_images[0].image_url" /> <!-- indice 0 perchè gli devo passare la prima proprietà di un array di oggetti -->
+            :image="singleCard.card_images[0].image_url" :race="singleCard.race" /> <!-- indice 0 perchè gli devo passare la prima proprietà di un array di oggetti -->
           </div>
+          <p v-else>Nessun risultato</p>
         </div>
       </div>
 
@@ -72,11 +78,11 @@ export default {
 main{
   background-color: $background;
   text-align: center;
-  padding-bottom: 20px;
+  padding: 20px 0;
   
   .card-box{
     background-color: white;
-    padding: 30px;
+    padding: 10px 30px;
 
     .found{
       background-color: $found-box;
@@ -86,6 +92,11 @@ main{
       span{
         color: white;
         font-weight: bold;
+      }
+    }
+    .box-interno{
+      p{
+        margin: 10px 0;
       }
     }
   }

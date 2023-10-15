@@ -20,6 +20,7 @@ export default {
   },
   methods:{
     getApi(){
+      store.isPresent=true;
       axios.get(store.apiUrl, {
         params:{
           num: 20,
@@ -33,10 +34,14 @@ export default {
           if(!store.archetypeList.includes(card.archetype)){
             store.archetypeList.push(card.archetype)
           }
+          if(!store.raceList.includes(card.race)){
+            store.raceList.push(card.race)
+          }
         })
       })
       .catch( error =>{
-        store.cardList= [];
+        console.log("errore")
+        store.isPresent = false;
       })
     }
   },

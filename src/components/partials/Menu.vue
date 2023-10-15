@@ -11,6 +11,7 @@ export default {
   },
   methods:{
     getApi(){
+      store.isPresent=true;
       axios.get(store.apiUrl, {
         params:{
           num: 20,
@@ -24,14 +25,19 @@ export default {
           if(!store.archetypeList.includes(card.archetype)){
             store.archetypeList.push(card.archetype)
           }
+          if(!store.raceList.includes(card.race)){
+            store.raceList.push(card.race)
+          }
         })
       })
       .catch( error =>{
-        store.cardList= [];
+        console.log("error")
+        store.isPresent=false;
       })
     },
     reset(){
       store.archetypeToSearch="";
+      store.raceToSearch="";
       this.getApi();
     }
   }
@@ -41,9 +47,15 @@ export default {
 <template>
     <div class="menu d-flex">
       <select v-model="store.archetypeToSearch" class="form-select" aria-label="Default select example">
-        <option selected value="">Select status</option>
+        <option selected value="">Select archetype</option>
         <option v-for="(archetype, index) in store.archetypeList" :key="index" :value="archetype">{{ archetype }}</option>
       </select>
+
+      <select v-model="store.raceToSearch" class="form-select" aria-label="Default select example">
+        <option selected value="">Select race</option>
+        <option v-for="(race, index) in store.raceList" :key="index" :value="race">{{ race }}</option>
+      </select>
+
       <button @click="$emit('startSearch')" class="btn btn-info mx-4">Search</button>
       <button @click="reset" class="btn btn-warning">Reset</button>
     </div>
@@ -54,8 +66,12 @@ export default {
 @use "../../scss/partials/variables" as *;
 
   .menu{
-    width: fit-content;
+    width: 700px;
     padding: 20px 10px;
+
+    select{
+      margin-right: 20px;
+    }
   }
 
 
